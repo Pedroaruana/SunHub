@@ -1,0 +1,43 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# assets do cesium, copiados do node_modules pelo scripts/cesium.mjs
+public/cesium/
+
+# nunca versionar segredo
+.env
+.env.*
+!.env.example
+
+# projeto nativo gerado pelo capacitor
+android/app/build/
+android/.gradle/
+android/local.properties
+
+# apk gerado localmente
+*.apk
+
+# nao vai pro repositorio
+.claude/

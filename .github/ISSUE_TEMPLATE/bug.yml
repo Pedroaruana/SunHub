@@ -1,0 +1,57 @@
+name: Bug
+description: Alguma coisa não funciona como devia
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Falha de segurança não vai aqui. Veja o SECURITY.md.
+
+  - type: textarea
+    id: oque
+    attributes:
+      label: O que aconteceu
+      description: O que você viu na tela, não o que você acha que causou.
+    validations:
+      required: true
+
+  - type: textarea
+    id: esperado
+    attributes:
+      label: O que você esperava que acontecesse
+    validations:
+      required: true
+
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como repetir
+      description: Passo a passo, do começo. Diga em qual tela começou.
+      placeholder: |
+        1. Abri o Início
+        2. Toquei em Marcar minha área
+        3. Desci em ...
+    validations:
+      required: true
+
+  - type: input
+    id: onde
+    attributes:
+      label: Navegador e aparelho
+      placeholder: Chrome 141 no Windows 11, ou Safari no iPhone 15
+    validations:
+      required: true
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Erro no console, se tiver
+      description: Abra as ferramentas do desenvolvedor e cole o que aparecer em vermelho.
+      render: text
+
+  - type: checkboxes
+    id: mapa
+    attributes:
+      label: Envolve o mapa
+      options:
+        - label: O problema acontece numa tela com globo ou mapa

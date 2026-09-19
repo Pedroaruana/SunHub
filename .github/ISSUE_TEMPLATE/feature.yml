@@ -1,0 +1,33 @@
+name: Ideia
+description: Sugerir algo novo ou uma mudança de comportamento
+labels: ["ideia"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Qual problema isso resolve
+      description: Comece pelo problema, não pela solução. Se não tiver problema, provavelmente não precisa existir.
+    validations:
+      required: true
+
+  - type: textarea
+    id: ideia
+    attributes:
+      label: O que você propõe
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternativas
+    attributes:
+      label: O que você já considerou e descartou
+
+  - type: checkboxes
+    id: regras
+    attributes:
+      label: Antes de enviar
+      options:
+        - label: Li a lista de decisões que não mudam por engano, no CONTRIBUTING.md
+          required: true
+        - label: Isto não coloca campo de pagamento, dado pessoal ou cobrança no fluxo
+          required: true
