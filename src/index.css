@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  background: #1b1d22;
+}
+
+/* o ponto que pisca na barra de estado */
+.pulso::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid #cfe2fa;
+  animation: pulsa 2600ms ease-out infinite;
+}
+
+@keyframes pulsa {
+  0% { transform: scale(.6); opacity: .9 }
+  70%, 100% { transform: scale(2.2); opacity: 0 }
+}
+
+/* a abertura. tudo comeca invisivel e entra na ordem: ceu, sol, anel, nome,
+   o eclipse saindo, e por ultimo o conteudo */
+.abertura .estrelas,
+.abertura .sol,
+.abertura .coroa,
+.abertura .eclipse,
+.abertura .marca,
+.abertura .sat,
+.abertura .sobe {
+  opacity: 0;
+}
+
+.abertura .estrelas { animation: surge 1500ms ease-out 100ms forwards }
+.abertura .sol { animation: surge 1100ms ease-out 900ms forwards }
+.abertura .coroa {
+  animation: anel 1100ms cubic-bezier(.2,.7,.3,1) 900ms forwards,
+             some 1600ms ease-out 2600ms forwards;
+}
+.abertura .eclipse {
+  animation: surge 1100ms ease-out 900ms forwards,
+             sai 4600ms cubic-bezier(.4,0,.6,1) 1900ms forwards;
+}
+.abertura .eclipseMascara {
+  opacity: 1;
+  animation: sai 4600ms cubic-bezier(.4,0,.6,1) 1900ms forwards;
+}
+.abertura .sat { animation: surge 900ms ease-out 4000ms forwards }
+.abertura .marca { animation: nome 900ms cubic-bezier(.2,.7,.3,1) 1400ms forwards }
+
+.abertura .sobe-1 { animation: sobe 700ms cubic-bezier(.2,.7,.3,1) 4500ms forwards }
+.abertura .sobe-2 { animation: sobe 700ms cubic-bezier(.2,.7,.3,1) 4650ms forwards }
+.abertura .sobe-3 { animation: sobe 700ms cubic-bezier(.2,.7,.3,1) 4800ms forwards }
+.abertura .sobe-4 { animation: sobe 700ms cubic-bezier(.2,.7,.3,1) 4950ms forwards }
+.abertura .sobe-5 { animation: sobe 700ms cubic-bezier(.2,.7,.3,1) 5100ms forwards }
+
+.abertura .coroa { transform-box: fill-box; transform-origin: center }
+
+/* o disco e a mascara andam juntos a cada quadro. sem a camada propria o
+   navegador repinta o texto mascarado inteiro no caminho todo */
+.abertura .eclipse,
+.abertura .eclipseMascara { will-change: transform, opacity }
+
+@keyframes surge { to { opacity: 1 } }
+@keyframes some { to { opacity: 0 } }
+@keyframes anel { from { opacity: 0; transform: scale(.9) } to { opacity: 1; transform: none } }
+@keyframes nome { from { opacity: 0; transform: translateY(10px) } to { opacity: 1; transform: none } }
+@keyframes sobe { from { opacity: 0; transform: translateY(16px) } to { opacity: 1; transform: none } }
+@keyframes sai {
+  0% { transform: translateX(0); opacity: 1 }
+  62% { opacity: 1 }
+  100% { transform: translateX(336px); opacity: 0 }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .abertura .estrelas,
+  .abertura .sol,
+  .abertura .marca,
+  .abertura .sat,
+  .abertura .sobe { opacity: 1 }
+  .abertura .coroa,
+  .abertura .eclipse,
+  .abertura .eclipseMascara { opacity: 0 }
+  .abertura *, .pulso::after { animation: none !important }
+}
