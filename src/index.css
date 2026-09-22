@@ -88,3 +88,10 @@ html {
   .abertura .eclipseMascara { opacity: 0 }
   .abertura *, .pulso::after { animation: none !important }
 }
+
+/* a atribuicao da Esri fica, que e exigencia de uso da imagem. o logo do Cesium
+   Ion sai porque nao usamos o Ion em lugar nenhum, entao ele so mente */
+.cesium-widget-credits { font-size: 9px !important; opacity: .5 }
+.cesium-credit-logoContainer { display: none !important }
+
+@keyframes girar { to { transform: rotate(360deg) } }
