@@ -7,6 +7,9 @@ import { Inicio } from './pages/Inicio.tsx'
 // carregadas sob demanda, quem so abre o Inicio nao baixa nada disso
 const Area = lazy(() => import('./pages/Area.tsx').then((m) => ({ default: m.Area })))
 const Sol = lazy(() => import('./pages/Sol.tsx').then((m) => ({ default: m.Sol })))
+const Passagem = lazy(() =>
+  import('./pages/Passagem.tsx').then((m) => ({ default: m.Passagem }))
+)
 
 export const App = () => (
   <BrowserRouter>
@@ -15,6 +18,7 @@ export const App = () => (
         <Route path="/" element={<Inicio />} />
         <Route path="/area" element={<Area />} />
         <Route path="/sol" element={<Sol />} />
+        <Route path="/passagem" element={<Passagem />} />
       </Routes>
     </Suspense>
   </BrowserRouter>
