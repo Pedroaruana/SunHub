@@ -2,6 +2,9 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { Carregando } from './components/Carregando.tsx'
 import { Inicio } from './pages/Inicio.tsx'
+import { Orcamento } from './pages/Orcamento.tsx'
+import { Pacote } from './pages/Pacote.tsx'
+import { Pacotes } from './pages/Pacotes.tsx'
 
 // as telas de mapa puxam o Cesium, que sozinho e a maior parte do peso.
 // carregadas sob demanda, quem so abre o Inicio nao baixa nada disso
@@ -19,6 +22,9 @@ export const App = () => (
         <Route path="/area" element={<Area />} />
         <Route path="/sol" element={<Sol />} />
         <Route path="/passagem" element={<Passagem />} />
+        <Route path="/pacote" element={<Pacote />} />
+        <Route path="/orcamento" element={<Orcamento />} />
+        <Route path="/pacotes" element={<Pacotes />} />
       </Routes>
     </Suspense>
   </BrowserRouter>
