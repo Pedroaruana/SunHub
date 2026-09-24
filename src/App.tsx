@@ -2,6 +2,8 @@ import { lazy, Suspense } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router'
 import { Carregando } from './components/Carregando.tsx'
 import { Inicio } from './pages/Inicio.tsx'
+import { Legal } from './pages/Legal.tsx'
+import { NaoAchou } from './pages/NaoAchou.tsx'
 import { Orcamento } from './pages/Orcamento.tsx'
 import { Pacote } from './pages/Pacote.tsx'
 import { Pacotes } from './pages/Pacotes.tsx'
@@ -25,6 +27,10 @@ export const App = () => (
         <Route path="/pacote" element={<Pacote />} />
         <Route path="/orcamento" element={<Orcamento />} />
         <Route path="/pacotes" element={<Pacotes />} />
+        <Route path="/privacidade" element={<Legal qual="privacidade" />} />
+        <Route path="/termos" element={<Legal qual="termos" />} />
+        <Route path="/cookies" element={<Legal qual="cookies" />} />
+        <Route path="*" element={<NaoAchou />} />
       </Routes>
     </Suspense>
   </BrowserRouter>
