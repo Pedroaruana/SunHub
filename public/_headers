@@ -1,0 +1,26 @@
+# Cabecalhos da versao web. Formato do Netlify; em outro host o conteudo e o
+# mesmo, muda so onde se declara.
+#
+# A CSP precisa liberar tres coisas de fora: os tiles da Esri, as fontes do
+# Google e o blob: que o Cesium usa pros proprios workers. Sem o blob: o globo
+# nao carrega.
+#
+# O unsafe-eval doi e eu tentei viver sem ele. O Viewer do Cesium carrega o
+# Knockout junto, e o preambulo do Knockout faz (0,eval)("this") pra pegar o
+# objeto global. Isso estoura na avaliacao do modulo e derruba as tres telas de
+# mapa, tela preta. Sair dele significa trocar o Viewer pelo CesiumWidget, que
+# nao puxa Knockout, e isso e refatoracao de outra tarefa.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval' 'unsafe-eval' blob:; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: blob: https://services.arcgisonline.com; connect-src 'self' https://services.arcgisonline.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), payment=(), usb=(), geolocation=(self)
+
+# os assets do Cesium tem hash no nome e podem ficar em cache por muito tempo
+/cesium/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable

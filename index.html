@@ -12,11 +12,7 @@
   </head>
   <body>
     <div id="root"></div>
-    <script>
-      // o Cesium le isto de window antes de carregar os proprios workers, entao
-      // tem que ser script normal e vir antes do modulo
-      window.CESIUM_BASE_URL = '/cesium'
-    </script>
+    <script src="/cesium-base.js"></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
