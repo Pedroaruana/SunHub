@@ -355,6 +355,13 @@ export const pt = {
     }
   },
 
+  erro: {
+    codigo: 'FALHA NA TELA',
+    titulo: 'Alguma coisa quebrou aqui',
+    texto:
+      'A tela parou de desenhar. A área que você marcou continua guardada no aparelho, nada se perdeu.',
+    recarregar: 'Desenhar de novo'
+  },
   naoAchou: {
     codigo: 'ERRO 404',
     titulo: 'Eclipse total por aqui',

@@ -357,6 +357,13 @@ export const en: Dicionario = {
     }
   },
 
+  erro: {
+    codigo: 'SCREEN FAILURE',
+    titulo: 'Something broke here',
+    texto:
+      'The screen stopped drawing. The area you marked is still stored on your device, nothing was lost.',
+    recarregar: 'Draw again'
+  },
   naoAchou: {
     codigo: 'ERROR 404',
     titulo: 'Total eclipse here',
