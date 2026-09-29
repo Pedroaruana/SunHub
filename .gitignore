@@ -41,3 +41,7 @@ android/local.properties
 
 # nao vai pro repositorio
 .claude/
+
+# resultado e rastro do playwright
+test-results/
+playwright-report/
