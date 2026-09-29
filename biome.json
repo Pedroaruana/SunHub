@@ -5,6 +5,7 @@
       "src/**/*.ts",
       "src/**/*.tsx",
       "scripts/**/*.mjs",
+      "e2e/**/*.ts",
       "*.ts",
       "*.json"
     ]
