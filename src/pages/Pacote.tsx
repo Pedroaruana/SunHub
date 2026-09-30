@@ -55,7 +55,9 @@ export const Pacote = () => {
   const rotuloNoites = [t.pacote.umaNoite, t.pacote.umaSemana, t.pacote.umMes]
 
   return (
-    <Tela estado={`${t.comum.areaMarcada} ${numero(idioma, hectares, 1)} ha`}>
+    <Tela
+      estado={`${area ? t.comum.areaMarcada : t.comum.areaDeDemonstracao} ${numero(idioma, hectares, 1)} ha`}
+    >
       <div className="px-6 pb-14 pt-24">
         <p className="font-mono text-[8.5px] tracking-[0.22em] text-[#6d84a8]">
           {t.pacote.passo}
