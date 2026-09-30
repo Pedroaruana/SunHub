@@ -286,7 +286,9 @@ export const Sol = () => {
   }
 
   return (
-    <Tela estado={`${t.comum.areaMarcada} ${numero(idioma, hectares, 1)} ha`}>
+    <Tela
+      estado={`${area ? t.comum.areaMarcada : t.comum.areaDeDemonstracao} ${numero(idioma, hectares, 1)} ha`}
+    >
       <div ref={caixa} className="absolute inset-x-0 top-0 bottom-[var(--painel,0px)]" />
 
       <Painel>

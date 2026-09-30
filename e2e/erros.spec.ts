@@ -99,3 +99,35 @@ test.describe('aparelho em ingles', () => {
     await expect(page.getByRole('heading', { name: 'Total eclipse here' })).toBeVisible()
   })
 })
+
+// quatro telas caem numa area de demonstracao quando ninguem marcou nada, e
+// isso e proposital: da pra ver o app inteiro sem desenhar no globo. o que nao
+// pode e o numero se passar pela terra da pessoa
+test('sem area marcada, a tela avisa que a area e de demonstracao', async ({ page }) => {
+  for (const rota of ['/sol', '/passagem', '/pacote']) {
+    await page.goto(rota)
+    await expect(page.getByText(/ÁREA DE DEMONSTRAÇÃO \d/), rota).toBeVisible()
+    await expect(page.getByText(/ÁREA MARCADA \d/), rota).toHaveCount(0)
+  }
+})
+
+test('com area marcada, a tela para de chamar de demonstracao', async ({ page }) => {
+  await page.goto('/')
+  await page.evaluate(() => {
+    sessionStorage.setItem(
+      'sunhub.area',
+      JSON.stringify({
+        cantos: [
+          [71.92, 27.474],
+          [71.927, 27.474],
+          [71.927, 27.48],
+          [71.92, 27.48]
+        ]
+      })
+    )
+  })
+
+  await page.goto('/pacote')
+  await expect(page.getByText(/ÁREA MARCADA \d/)).toBeVisible()
+  await expect(page.getByText(/ÁREA DE DEMONSTRAÇÃO \d/)).toHaveCount(0)
+})
