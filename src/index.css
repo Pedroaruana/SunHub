@@ -9,6 +9,13 @@ html {
   background: #1b1d22;
 }
 
+/* a rolagem acontece dentro do aparelho, e a barra clara do sistema aparecia
+   por cima da moldura. fina e escura, ela some no desenho */
+.telaRolante {
+  scrollbar-width: thin;
+  scrollbar-color: #26344a transparent;
+}
+
 /* o ponto que pisca na barra de estado */
 .pulso::after {
   content: "";

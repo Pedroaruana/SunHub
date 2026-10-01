@@ -1,4 +1,4 @@
-export const SITE = 'https://sunhub.example'
+export const SITE = 'https://sunhub.aruanapedro.workers.dev'
 
 export type Rota = {
   readonly caminho: string
