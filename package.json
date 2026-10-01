@@ -17,7 +17,8 @@
     "icones": "node scripts/icones.mjs",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:tela": "playwright test"
+    "test:tela": "playwright test",
+    "nginx": "node scripts/nginx.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",
