@@ -5,10 +5,11 @@ import { defineConfig, devices } from '@playwright/test'
 // algo funcionar no dev e quebrar no build
 export default defineConfig({
   testDir: './e2e',
-  fullyParallel: true,
-  // teto de trabalhadores: o pedaco do Cesium tem 4 MB e varias telas rodando
-  // ao mesmo tempo comecam a disputar cpu e a derrubar teste por tempo
-  workers: 2,
+  // um trabalhador so. tres telas carregam o Cesium e cada uma sobe um contexto
+  // de WebGL proprio. com duas ao mesmo tempo o teste do fluxo inteiro caia por
+  // tempo, passava sozinho e falhava na suite, que e o pior tipo de teste
+  fullyParallel: false,
+  workers: 1,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 1 : 0,
   reporter: process.env.CI ? 'list' : 'line',
