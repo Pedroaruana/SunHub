@@ -23,7 +23,7 @@ test('cada rota tem titulo e canonical proprios no html servido', async ({ reque
     const html = await (await request.get(caminho === '/' ? '/' : `${caminho}/`)).text()
     expect(html, caminho).toContain(`<title>${titulo}</title>`)
     expect(html, caminho).toContain(
-      `rel="canonical" href="https://sunhub.example${caminho}"`
+      `rel="canonical" href="https://sunhub.aruanapedro.workers.dev${caminho}"`
     )
   }
 })
