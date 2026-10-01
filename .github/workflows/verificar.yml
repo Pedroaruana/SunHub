@@ -1,0 +1,67 @@
+name: verificar
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# PR novo em cima de um que ainda esta rodando cancela o anterior. sem isto a
+# fila enche de execucao de commit que ja nao existe mais
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          # o build roda o prerender com --experimental-strip-types, que precisa
+          # de node novo. 24 e o que eu uso aqui na maquina
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run lint
+
+      - run: npx tsc -b --noEmit
+
+      - run: npm test
+
+      - run: npm run build
+
+  navegador:
+    runs-on: ubuntu-latest
+    # job separado porque baixar o chromium demora bem mais que todo o resto
+    # junto, e assim a verificacao rapida nao fica esperando por ele
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      - run: npx playwright test
+
+      # o rastro so e guardado quando algo cai, e e ele que diz o que a tela
+      # estava mostrando na hora
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rastro-playwright
+          path: |
+            test-results
+            playwright-report
+          retention-days: 7
