@@ -18,7 +18,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:tela": "playwright test",
-    "nginx": "node scripts/nginx.mjs"
+    "nginx": "node scripts/nginx.mjs",
+    "diagramas": "node --experimental-strip-types scripts/diagramas.mjs"
   },
   "dependencies": {
     "@capacitor/android": "^8.5.2",

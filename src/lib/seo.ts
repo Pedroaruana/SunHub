@@ -74,10 +74,21 @@ export const ROTAS: readonly Rota[] = [
   }
 ]
 
-export const rotaDe = (caminho: string): Rota =>
-  ROTAS.find((r) => r.caminho === caminho) ?? {
-    caminho,
-    titulo: 'Página não encontrada, SunHub',
-    descricao: 'Esta página não existe.',
-    escondida: true
-  }
+// a hospedagem serve o html da subpasta e redireciona /sol para /sol/. sem
+// tirar essa barra, nenhuma rota batia aqui depois do redirecionamento: a tela
+// montava, nao se achava na lista e se marcava como noindex sozinha
+const semBarraNoFim = (caminho: string) =>
+  caminho.length > 1 ? caminho.replace(/\/+$/, '') : caminho
+
+export const rotaDe = (caminho: string): Rota => {
+  const limpo = semBarraNoFim(caminho)
+
+  return (
+    ROTAS.find((r) => r.caminho === limpo) ?? {
+      caminho: limpo,
+      titulo: 'Página não encontrada, SunHub',
+      descricao: 'Esta página não existe.',
+      escondida: true
+    }
+  )
+}

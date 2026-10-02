@@ -80,3 +80,21 @@ test('o link de pular para o conteudo aparece no teclado', async ({ page }) => {
 
   await expect(page.getByRole('link', { name: 'Pular para o conteúdo' })).toBeFocused()
 })
+
+// o teste de cima le o html cru e por isso nao viu o problema: a hospedagem
+// redireciona /sol para /sol/, e so depois que o react monta e que a rota e
+// procurada de novo. era ai que toda tela se marcava como noindex sozinha
+test('depois de montar, a tela continua sendo ela mesma com a barra no fim', async ({
+  page
+}) => {
+  for (const [caminho, titulo] of ROTAS) {
+    if (caminho === '/') continue
+
+    await page.goto(`${caminho}/`)
+    await expect(page, caminho).toHaveTitle(titulo)
+    await expect(page.locator('meta[name="robots"]').first(), caminho).toHaveAttribute(
+      'content',
+      'index,follow'
+    )
+  }
+})
